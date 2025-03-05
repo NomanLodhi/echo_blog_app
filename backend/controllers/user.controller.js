@@ -59,8 +59,9 @@ catch(error){
 const getUser= async(req,res)=>{
     const {id}=req.params
     req.id=id
-    console.log(id,"Heyyy")
-    res.status(200).json({data:"User access",UserId:req.id})
+    const singleUser=await db.user.findOne({where:{id}})
+    console.log(id)
+    res.status(200).json({msg:"User access",UserId:req.id,data:singleUser})
 }
 const getUsers=async(req,res)=>{
     const allUsers=await db.user.findAll()

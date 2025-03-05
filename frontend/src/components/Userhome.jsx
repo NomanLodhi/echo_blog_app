@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 
 export default function Userhome() {
- const[user,setUser]= useState('')
+ const[user,setUser]= useState({})
   useEffect(()=>{
     const myToken=localStorage.getItem('token')
-    fetch('http://localhost:7000/api/v1/users/2c6509f0-f551-11ef-a050-ff412ea75f7f',
+    const ID=localStorage.getItem('userId')
+    console.log(ID)
+    fetch(`http://localhost:7000/api/v1/users/2c6509f0-f551-11ef-a050-ff412ea75f7f`,
       {
         method:"GET",
         headers:{
@@ -13,16 +15,16 @@ export default function Userhome() {
          }
       }
     ).then((res)=>{
-      res.json()
+    return  res.json()
 
     }).then((data)=>{
       setUser(data)
+      console.log(data)
     })
   },[])
-  console.log(user)
   return (
     <div>
-      <h1>{user}</h1>
+      <h1>{user.UserId}</h1>
     </div>
   )
 }
