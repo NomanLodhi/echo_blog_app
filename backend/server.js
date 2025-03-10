@@ -7,8 +7,8 @@ const port=process.env.PORT;
 (async()=>{
     try{
         await sequelize.authenticate();
-        await db.user.sync();
-        await db.author.sync();
+        await db.user.sync({force:false});
+        // await db.author.sync({force:true});
         console.log('Database connected successfully!!')
     }
     catch(error){

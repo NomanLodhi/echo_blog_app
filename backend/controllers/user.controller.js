@@ -60,12 +60,25 @@ const getUser= async(req,res)=>{
     const {id}=req.params
     req.id=id
     const singleUser=await db.user.findOne({where:{id}})
-    console.log(id)
     res.status(200).json({msg:"User access",UserId:req.id,data:singleUser})
+}
+const editUser=async(req,res)=>{
+    try{
+     const {id}=req.params;
+     const {name,email,password}=req.body;
+     const profile=req.file.filename;
+     await db.user.update({name,email,password,profile},{where:{id}});
+     const salt=await bcrypt.genSalt(10);
+     await bcrypt.hash(password,salt)
+     res.json({msg:'successfully edited user information!!'})
+    }
+    catch(error){
+        console.log(error.message)
+    }
 }
 const getUsers=async(req,res)=>{
     const allUsers=await db.user.findAll()
     res.status(200).json({status:'success',data:allUsers})
 }
 
-module.exports={signUp,signIn,getUser,getUsers}
+module.exports={signUp,signIn,getUser,getUsers,editUser}

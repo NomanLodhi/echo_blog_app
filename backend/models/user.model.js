@@ -19,6 +19,10 @@ const USER= sequelize.define('user',{
      type:DataTypes.STRING,
      allowNull:false
     }, 
+    role:{
+    type:DataTypes.STRING,
+    defaultValue:'guest'
+    },
     profile:{
         type:DataTypes.STRING
     }

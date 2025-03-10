@@ -14,10 +14,10 @@ export default function SignIn() {
       return  res.json()
     }).then((user)=>{
     localStorage.setItem('token',user.Token)
-    localStorage.setItem('usedId',user.data.id)
+    localStorage.setItem('userId',user.data.id)
     console.log(user)
     console.log(typeof user.data.id)
-    if(!user.data.email || !user.data.password){
+    if(!user.data.email==data.email){
       alert('Enter valid info')
     }
     
