@@ -27,6 +27,10 @@ export default function Editprofile() {
         
     const updateUser=(e)=>{
   e.preventDefault();
+  if( !changes.name || !changes.password ){
+    alert('Knidly enter all info')
+  }
+ else{
   const newData=new FormData;
   newData.append('name',changes.name)
   newData.append("password",changes.password)
@@ -36,11 +40,12 @@ export default function Editprofile() {
     body:newData
    }).then(res=>res.json()).then(data=>console.log(data))
     }
+  }
     const Id=localStorage.getItem('userId')
     return (
     <div>
         <form action={`${Id}`} onSubmit={(e)=>{updateUser(e)}} enctype="multipart/form-data">
-            <input type="text" className='form-control my-2'  onChange={(e)=>{setChanges({...changes,name:e.target.value})}}/>
+            <input type="text" className='form-control my-2'  onChange={(e)=>{setChanges({...changes,name:e.target.value})}} defaultValue={user.data && user.data.name}/>
             
             <input type="password" className='form-control my-2' placeholder='Enter new password' onChange={(e)=>{setChanges({...changes,password:e.target.value})}}/>
             <input type="file" className='form-control my-2' name='profile' onChange={(e)=>{
@@ -48,7 +53,7 @@ export default function Editprofile() {
             }}/>
       <button className='btn btn-primary'>Submit</button>
         </form>
-      <h1>{user.data && user.data.name}</h1>
+      
     </div>
   )
 }

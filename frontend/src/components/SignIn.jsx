@@ -15,15 +15,19 @@ export default function SignIn() {
     }).then((user)=>{
     localStorage.setItem('token',user.Token)
     localStorage.setItem('userId',user.data.id)
+    localStorage.setItem('role',user.data.role)
     console.log(user)
     console.log(typeof user.data.id)
-    if(!user.data.email==data.email){
-      alert('Enter valid info')
-    }
-    
-    else{
+    let role=localStorage.getItem('role');
+    if(role=='reader'){
       navigate('/user')
     }
+    
+    if(role=='admin'){
+      navigate('/admin')
+    }
+    
+
     }).catch(err=>{console.log(err)})
    }
   

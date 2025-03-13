@@ -67,9 +67,9 @@ const editUser=async(req,res)=>{
      const {id}=req.params;
      const {name,email,password}=req.body;
      const profile=req.file.filename;
-     await db.user.update({name,email,password,profile},{where:{id}});
      const salt=await bcrypt.genSalt(10);
-     await bcrypt.hash(password,salt)
+     const changedPassword= await bcrypt.hash(password,salt)
+     await db.user.update({name,email,password:changedPassword,profile},{where:{id}});
      res.json({msg:'successfully edited user information!!'})
     }
     catch(error){

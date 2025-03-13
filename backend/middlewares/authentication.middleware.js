@@ -21,5 +21,9 @@ const authMW=(req,res,next)=>{
     
 })
 }
-
+const roleauthMV=(req,res,next)=>{
+    req.role=['admin','author'];
+    next()
+}
 module.exports=authMW;
+module.exports=roleauthMV;
