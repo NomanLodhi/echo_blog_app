@@ -1,6 +1,6 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/db");
-
+const db=require('./index')
 const AUTHOR=sequelize.define('author',{
     id:{
         type:DataTypes.UUID,
@@ -13,6 +13,14 @@ const AUTHOR=sequelize.define('author',{
     qualification:{
         type:DataTypes.STRING,
         allowNull:false
+    },
+    user_id:{
+        type:DataTypes.UUID,
+        allowNull:false,
+        references:{
+            model:db.user,
+            key:'id'
+        }
     }
 })
 

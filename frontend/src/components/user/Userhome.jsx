@@ -26,6 +26,7 @@ export default function Userhome({allowedRole}) {
   const signOut=()=>{
     localStorage.removeItem('userId')
     localStorage.removeItem('token')
+    localStorage.removeItem('role')
     navigate('/signin')
   }
   // console.log(user.data)
@@ -37,6 +38,7 @@ export default function Userhome({allowedRole}) {
         
         <h1>{user.data && user.data.name}</h1>
         <Link className='btn btn-primary' to='/edit'>Edit profile</Link>
+        <Link className='btn btn-primary' to='/author-request'>Switch to author</Link>
         <button className='btn btn-primary' onClick={()=>{signOut()}}>Sign out</button>
       </div>
     ):(

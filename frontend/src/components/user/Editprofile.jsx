@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
+import { Navigate } from 'react-router-dom'
 
-export default function Editprofile() {
+export default function Editprofile({allowedRole}) {
     const[user,setUser]= useState({})
     const [changes,setChanges]=useState({})
       useEffect(()=>{
@@ -42,18 +43,20 @@ export default function Editprofile() {
     }
   }
     const Id=localStorage.getItem('userId')
-    return (
-    <div>
-        <form action={`${Id}`} onSubmit={(e)=>{updateUser(e)}} enctype="multipart/form-data">
-            <input type="text" className='form-control my-2'  onChange={(e)=>{setChanges({...changes,name:e.target.value})}} defaultValue={user.data && user.data.name}/>
-            
-            <input type="password" className='form-control my-2' placeholder='Enter new password' onChange={(e)=>{setChanges({...changes,password:e.target.value})}}/>
-            <input type="file" className='form-control my-2' name='profile' onChange={(e)=>{
-                setChanges({...changes,profile:e.target.files[0]})
-            }}/>
-      <button className='btn btn-primary'>Submit</button>
-        </form>
-      
-    </div>
-  )
+    return allowedRole == localStorage.getItem('role')?(
+      <div>
+          <form action={`${Id}`} onSubmit={(e)=>{updateUser(e)}} enctype="multipart/form-data">
+              <input type="text" className='form-control my-2'  onChange={(e)=>{setChanges({...changes,name:e.target.value})}} defaultValue={user.data && user.data.name}/>
+              
+              <input type="password" className='form-control my-2' placeholder='Enter new password' onChange={(e)=>{setChanges({...changes,password:e.target.value})}}/>
+              <input type="file" className='form-control my-2' name='profile' onChange={(e)=>{
+                  setChanges({...changes,profile:e.target.files[0]})
+              }}/>
+        <button className='btn btn-primary'>Submit</button>
+          </form>
+        
+      </div>
+    ): (
+      <Navigate to={'/signin'}/>
+    )
 }

@@ -27,6 +27,10 @@ export default function SignIn() {
       navigate('/admin')
     }
     
+    if(role=='author'){
+      navigate('/author')
+    }
+    
 
     }).catch(err=>{console.log(err)})
    }

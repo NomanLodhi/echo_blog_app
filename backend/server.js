@@ -7,8 +7,8 @@ const port=process.env.PORT;
 (async()=>{
     try{
         await sequelize.authenticate();
-        await db.user.sync({force:false});
-        // await db.author.sync({force:true});
+        await db.user.sync({});
+        await db.author.sync({});
         console.log('Database connected successfully!!')
     }
     catch(error){
@@ -20,7 +20,7 @@ app.listen(port,(err)=>{
         console.log(`Error while starting server ${err}`)
     }
     else{
-        console.log(`Server started t port : ${port}`)
+        console.log(`Server started at port : ${port}`)
     }
         
 })

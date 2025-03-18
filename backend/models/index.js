@@ -5,10 +5,10 @@ const db={}
 db.user=USER;
 db.author=AUTHOR;
 
-// db.user.hasOne(
-//     db.author,{
-//         foreignKey:'user_id'
-//     });
-// db.author.belongsTo(db.user,{foreignKey:'user_id'});
+db.user.hasOne(
+    db.author,{
+        foreignKey:'user_id'
+    });
+db.author.belongsTo(db.user,{foreignKey:'user_id'});
 
 module.exports=db;
